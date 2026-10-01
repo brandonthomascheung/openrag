@@ -52,7 +52,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: getAllowedDevOrigins(),
 
   //Attempt to add a base path for CPD - may need to figure out a way to toggle this based upon whether or not this is being built for CPD/SaaS
-  basePath: '/openrag-fe',
+  basePath: "/openrag-fe",
 };
 
 export default nextConfig;
