@@ -50,6 +50,9 @@ const nextConfig: NextConfig = {
   },
   // Allow cross-origin requests in development
   allowedDevOrigins: getAllowedDevOrigins(),
+
+  //Attempt to add a base path for CPD - may need to figure out a way to toggle this based upon whether or not this is being built for CPD/SaaS
+  basePath: '/openrag-fe',
 };
 
 export default nextConfig;
