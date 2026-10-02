@@ -106,8 +106,8 @@ const KNOWN_PREFIXES = new Set([
 ]);
 
 export function normalizeRoute(raw: string): string {
-  if (raw === "/") return "/";
-  if (raw.startsWith("/_next/")) return "/_next/*";
+  if (raw === "/openrag-fe") return "/";
+  if (raw.startsWith("/openrag-fe/_next/")) return "/_next/*";
 
   const firstSeg = raw.split("/", 2)[1];
   if (!firstSeg || !KNOWN_PREFIXES.has(firstSeg)) return "unmatched";
