@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
     proxyTimeout: 300000, // 5 minutes
   },
   async rewrites() {
-    return [{ source: "/mcp/:path*", destination: "/api/mcp/:path*" }];
+    return [{ source: "/mcp/:path*", destination: "openrag-fe/api/mcp/:path*" }];
   },
   // Disable built-in image optimization so Next does not require the `sharp`
   // native dependency (and its LGPL libvips binaries). The only <Image> usage

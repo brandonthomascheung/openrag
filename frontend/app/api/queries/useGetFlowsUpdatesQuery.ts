@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 export type FlowUpdate = {
   flow_type: "nudges" | "retrieval" | "ingest" | "url_ingest";
@@ -11,7 +12,7 @@ export function useGetFlowsUpdatesQuery(options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ["flows", "updates-available"],
     queryFn: async () => {
-      const response = await fetch("/api/settings/flows/updates-available");
+      const response = await apiClient("/api/settings/flows/updates-available");
       if (!response.ok) {
         throw new Error("Failed to fetch flow updates");
       }

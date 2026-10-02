@@ -1,6 +1,7 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import {
   ChevronDown,
   File as FileIcon,
@@ -164,7 +165,7 @@ export function KnowledgeDropdown() {
 
         // Check upload batch size and bucket connector availability in parallel
         const [uploadOptionsRes, ...bucketResponses] = await Promise.all([
-          fetch("/api/upload_options"),
+          apiClient("/api/upload_options"),
           ...bucketDescriptors.map((d) =>
             fetch(`/api/connectors/${d.connectorType}/defaults`),
           ),
@@ -198,7 +199,7 @@ export function KnowledgeDropdown() {
         setBucketConnectorConfigured(configured);
 
         // Check cloud connectors
-        const connectorsRes = await fetch("/api/connectors");
+        const connectorsRes = await apiClient("/api/connectors");
         if (connectorsRes.ok) {
           const connectorsResult = await connectorsRes.json();
 
@@ -743,7 +744,7 @@ export function KnowledgeDropdown() {
     });
 
     try {
-      const response = await fetch("/api/upload_path", {
+      const response = await apiClient("/api/upload_path", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

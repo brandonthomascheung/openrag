@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
@@ -46,7 +47,7 @@ export function DevRoleToggle() {
 
   const mutation = useMutation({
     mutationFn: async (role: string) => {
-      const response = await fetch("/api/users/me/dev-role", {
+      const response = await apiClient("/api/users/me/dev-role", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role }),

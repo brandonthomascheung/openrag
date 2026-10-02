@@ -11,7 +11,7 @@ export interface DoclingHealthResponse {
 
 async function checkDoclingHealth(): Promise<DoclingHealthResponse> {
   try {
-    const response = await fetch("/api/docling/health", {
+    const response = await apiClient("/api/docling/health", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -1,13 +1,21 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { useState } from "react";
+import { apiClient } from "@/lib/api-client";
 import { FormProvider, useForm } from "react-hook-form";
+import { apiClient } from "@/lib/api-client";
 import { toast } from "sonner";
+import { apiClient } from "@/lib/api-client";
 import { useS3ConfigureMutation } from "@/app/api/mutations/useS3ConfigureMutation";
+import { apiClient } from "@/lib/api-client";
 import { useS3DefaultsQuery } from "@/app/api/queries/useS3DefaultsQuery";
+import { apiClient } from "@/lib/api-client";
 import AwsLogo from "@/components/icons/aws-logo";
+import { apiClient } from "@/lib/api-client";
 import { Button } from "@/components/ui/button";
+import { apiClient } from "@/lib/api-client";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +24,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { type S3FormData, S3SettingsForm } from "./s3-settings-form";
+import { apiClient } from "@/lib/api-client";
 
 interface S3SettingsDialogProps {
   open: boolean;
@@ -115,7 +124,7 @@ export default function S3SettingsDialog({
       const latestDefaults = await queryClient.fetchQuery({
         queryKey: ["s3-defaults"],
         queryFn: async () => {
-          const res = await fetch("/api/connectors/aws_s3/defaults");
+          const res = await apiClient("/api/connectors/aws_s3/defaults");
           return res.json();
         },
         staleTime: 0,

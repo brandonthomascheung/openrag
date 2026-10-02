@@ -1,6 +1,7 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -97,7 +98,7 @@ export default function AzureBlobSettingsDialog({
       // Validate credentials + list containers WITHOUT persisting. Saving is
       // reserved for the Save button (onSubmit), so testing never creates or
       // mutates the connection or clobbers the stored container selection.
-      const res = await fetch("/api/connectors/azure_blob/test", {
+      const res = await apiClient("/api/connectors/azure_blob/test", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         signal: controller.signal,
@@ -149,7 +150,7 @@ export default function AzureBlobSettingsDialog({
       const latestDefaults = await queryClient.fetchQuery({
         queryKey: ["azure-blob-defaults"],
         queryFn: async () => {
-          const res = await fetch("/api/connectors/azure_blob/defaults");
+          const res = await apiClient("/api/connectors/azure_blob/defaults");
           return res.json();
         },
         staleTime: 0,

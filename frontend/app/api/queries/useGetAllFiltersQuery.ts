@@ -4,9 +4,10 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import type { KnowledgeFilter } from "./useGetFiltersSearchQuery";
+import { apiClient } from "@/lib/api-client";
 
 async function getAllFilters(): Promise<KnowledgeFilter[]> {
-  const response = await fetch("/api/knowledge-filter/search", {
+  const response = await apiClient("/api/knowledge-filter/search", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query: "", limit: 1000 }),

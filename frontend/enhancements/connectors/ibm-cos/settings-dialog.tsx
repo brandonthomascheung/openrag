@@ -1,10 +1,15 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { useState } from "react";
+import { apiClient } from "@/lib/api-client";
 import { FormProvider, useForm } from "react-hook-form";
+import { apiClient } from "@/lib/api-client";
 import { toast } from "sonner";
+import { apiClient } from "@/lib/api-client";
 import { Button } from "@/components/ui/button";
+import { apiClient } from "@/lib/api-client";
 import {
   Dialog,
   DialogContent,
@@ -13,9 +18,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import IBMCOSIcon from "./icon";
+import { apiClient } from "@/lib/api-client";
 import { type IBMCOSFormData, IBMCOSSettingsForm } from "./settings-form";
+import { apiClient } from "@/lib/api-client";
 import { useIBMCOSConfigureMutation } from "./useIBMCOSConfigureMutation";
+import { apiClient } from "@/lib/api-client";
 import { useIBMCOSDefaultsQuery } from "./useIBMCOSDefaultsQuery";
+import { apiClient } from "@/lib/api-client";
 
 interface IBMCOSSettingsDialogProps {
   open: boolean;
@@ -115,7 +124,7 @@ export default function IBMCOSSettingsDialog({
       const latestDefaults = await queryClient.fetchQuery({
         queryKey: ["ibm-cos-defaults"],
         queryFn: async () => {
-          const res = await fetch("/api/connectors/ibm_cos/defaults");
+          const res = await apiClient("/api/connectors/ibm_cos/defaults");
           return res.json();
         },
         staleTime: 0,

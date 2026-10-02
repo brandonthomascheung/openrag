@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 export interface IBMCOSDefaults {
   api_key_set: boolean;
@@ -13,7 +14,7 @@ export interface IBMCOSDefaults {
 }
 
 async function fetchIBMCOSDefaults(): Promise<IBMCOSDefaults> {
-  const res = await fetch("/api/connectors/ibm_cos/defaults");
+  const res = await apiClient("/api/connectors/ibm_cos/defaults");
   if (!res.ok) throw new Error("Failed to fetch IBM COS defaults");
   return res.json();
 }

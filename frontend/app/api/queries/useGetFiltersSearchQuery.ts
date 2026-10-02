@@ -23,7 +23,7 @@ export const useGetFiltersSearchQuery = (
   const queryClient = useQueryClient();
 
   async function getFilters(): Promise<KnowledgeFilter[]> {
-    const response = await fetch("/api/knowledge-filter/search", {
+    const response = await apiClient("/api/knowledge-filter/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: search, limit }),

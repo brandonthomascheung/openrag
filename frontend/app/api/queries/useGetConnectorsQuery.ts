@@ -6,6 +6,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { apiClient } from "@/lib/api-client";
 import { useAuth } from "@/contexts/auth-context";
 import { useBrand, useIsCloudBrand } from "@/contexts/brand-context";
 import {
@@ -161,7 +162,7 @@ export interface GetConnectorsResponse {
 async function fetchWorkspaceConnectorAccess(): Promise<
   Record<string, boolean>
 > {
-  const response = await fetch("/api/connectors/workspace-policy");
+  const response = await apiClient("/api/connectors/workspace-policy");
   if (!response.ok) return {};
   const data = await response.json();
   return data?.access && typeof data.access === "object" ? data.access : {};
@@ -174,7 +175,7 @@ export const useGetConnectorsQuery = (
     useConnectorsQueryKey();
 
   async function getConnectors(): Promise<Connector[]> {
-    const connectorsResponse = await fetch("/api/connectors");
+    const connectorsResponse = await apiClient("/api/connectors");
     if (!connectorsResponse.ok) {
       throw new Error("Failed to fetch available connectors");
     }
@@ -299,7 +300,7 @@ export const useGetConnectorAccessQuery = (
   const { isIbmAuthMode } = useAuth();
 
   async function fetchConnectorAccess(): Promise<ConnectorAccessItem[]> {
-    const response = await fetch("/api/connectors/user-access");
+    const response = await apiClient("/api/connectors/user-access");
     if (!response.ok) {
       throw new Error(
         `Failed to fetch connectors permission (${response.status})`,
@@ -333,7 +334,7 @@ export const useUpdateConnectorAccessMutation = () => {
     mutationFn: async (
       access: Record<string, boolean>,
     ): Promise<ConnectorAccessItem[]> => {
-      const response = await fetch("/api/connectors/user-access", {
+      const response = await apiClient("/api/connectors/user-access", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ access }),

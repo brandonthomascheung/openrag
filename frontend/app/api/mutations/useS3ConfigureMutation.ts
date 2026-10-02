@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 export interface S3ConfigurePayload {
   access_key?: string;
@@ -10,7 +11,7 @@ export interface S3ConfigurePayload {
 }
 
 async function configureS3(payload: S3ConfigurePayload) {
-  const res = await fetch("/api/connectors/aws_s3/configure", {
+  const res = await apiClient("/api/connectors/aws_s3/configure", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

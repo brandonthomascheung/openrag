@@ -4,6 +4,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { formatProviderErrorMessage } from "@/lib/chat-stream-errors";
+import { apiClient } from "@/lib/api-client";
 import { useGetCurrentProviderModelsQuery } from "../queries/useGetModelsQuery";
 import type { Settings } from "../queries/useGetSettingsQuery";
 
@@ -107,7 +108,7 @@ export interface UpdateSettingsResponse {
 async function updateSettings(
   variables: UpdateSettingsRequest,
 ): Promise<UpdateSettingsResponse> {
-  const response = await fetch("/api/settings", {
+  const response = await apiClient("/api/settings", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 export interface AzureBlobConfigurePayload {
   auth_mode: "connection_string" | "account_key";
@@ -15,7 +16,7 @@ export interface AzureBlobConfigurePayload {
 }
 
 async function configureAzureBlob(payload: AzureBlobConfigurePayload) {
-  const res = await fetch("/api/connectors/azure_blob/configure", {
+  const res = await apiClient("/api/connectors/azure_blob/configure", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

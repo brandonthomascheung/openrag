@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight, ChevronDown, Loader2, Minus, Plus } from "lucide-react";
+import { apiClient } from "@/lib/api-client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
@@ -616,7 +617,7 @@ export function IngestSettingsSection() {
       elementId: "restore-ingest-flow-button",
       namespace: "settings",
     });
-    fetch("/api/reset-flow/ingest", { method: "POST" })
+    apiClient("/api/reset-flow/ingest", { method: "POST" })
       .then((res) =>
         res.text().then((text) => {
           const body = text ? JSON.parse(text) : {};

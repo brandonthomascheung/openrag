@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { KnowledgeFilter } from "../queries/useGetFiltersSearchQuery";
 
 export interface CreateFilterRequest {
@@ -16,7 +17,7 @@ export interface CreateFilterResponse {
 async function createFilter(
   data: CreateFilterRequest,
 ): Promise<CreateFilterResponse> {
-  const response = await fetch("/api/knowledge-filter", {
+  const response = await apiClient("/api/knowledge-filter", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

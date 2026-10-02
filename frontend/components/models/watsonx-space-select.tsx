@@ -126,7 +126,7 @@ export function WatsonxSpaceSelect({
             ssl_verify: sslVerify,
           }).filter(([, credentialValue]) => credentialValue !== ""),
         );
-        const response = await fetch("/api/models/watsonx_onprem/spaces", {
+        const response = await apiClient("/api/models/watsonx_onprem/spaces", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
