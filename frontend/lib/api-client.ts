@@ -16,20 +16,18 @@
  */
 
 /**
- * Get the base path from runtime configuration or build-time environment.
- * Priority:
- * 1. Runtime config from window.__RUNTIME_CONFIG__ (set by entrypoint script)
- * 2. Build-time NEXT_PUBLIC_BASE_PATH environment variable
- * 3. Empty string (no basePath)
+ * Get the base path from environment variable.
+ * Defaults to /openrag-fe for CPD deployments.
+ * Set NEXT_PUBLIC_BASE_PATH="" to disable the prefix.
  */
 function getBasePath(): string {
-  // Runtime config (for containerized deployments)
-  if (typeof window !== 'undefined' && (window as any).__RUNTIME_CONFIG__?.basePath) {
-    return (window as any).__RUNTIME_CONFIG__.basePath;
+  // Check if explicitly set to empty string (disabled)
+  if (process.env.NEXT_PUBLIC_BASE_PATH === '') {
+    return '';
   }
   
-  // Build-time environment variable (for local dev)
-  return process.env.NEXT_PUBLIC_BASE_PATH || '';
+  // Use environment variable or default to /openrag-fe
+  return process.env.NEXT_PUBLIC_BASE_PATH || '/openrag-fe';
 }
 
 /**
@@ -39,11 +37,11 @@ function getBasePath(): string {
  * @returns The full URL with basePath prefix if configured
  * 
  * @example
- * // Local dev (no basePath)
- * getApiUrl("/api/tasks") // => "/api/tasks"
- * 
- * // CPD deployment (with basePath)
+ * // With default basePath
  * getApiUrl("/api/tasks") // => "/openrag-fe/api/tasks"
+ * 
+ * // With NEXT_PUBLIC_BASE_PATH=""
+ * getApiUrl("/api/tasks") // => "/api/tasks"
  */
 export function getApiUrl(path: string): string {
   // Ensure path starts with /

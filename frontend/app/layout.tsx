@@ -48,9 +48,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script src="/runtime-config.js" />
-      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} ${chivo.variable} ${ibmPlexSans.variable} antialiased overflow-hidden bg-white dark:bg-black`}
       >

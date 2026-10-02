@@ -63,10 +63,8 @@ COPY --from=builder --chown=1001:0 /opt/app-root/src/next.config.* ./
 COPY --from=builder --chown=1001:0 /opt/app-root/src/postcss.config.* ./
 COPY --from=builder --chown=1001:0 /opt/app-root/src/tailwind.config.* ./
 COPY --from=builder --chown=1001:0 /opt/app-root/src/biome.json* ./
-COPY --chown=1001:0 scripts/generate-runtime-config.sh /opt/app-root/src/
 
 EXPOSE 3000 9090
 USER 1001
 
-# Generate runtime config from environment variables, then start the app
-CMD ["/bin/bash", "-c", "/opt/app-root/src/generate-runtime-config.sh && npm start"]
+CMD ["npm", "start"]
