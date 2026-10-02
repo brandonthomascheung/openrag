@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 import type { IngestSettings } from "@/components/cloud-picker/types";
 
@@ -46,7 +47,7 @@ export interface SyncAllPreviewResponse {
 
 // Sync all cloud connectors
 const syncAllConnectors = async (): Promise<SyncResponse> => {
-  const response = await fetch("/api/connectors/sync-all", {
+  const response = await apiClient("/api/connectors/sync-all", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -150,7 +151,7 @@ const syncConnectorPreview = async (
 };
 
 const syncAllConnectorsPreview = async (): Promise<SyncAllPreviewResponse> => {
-  const response = await fetch("/api/connectors/sync-all-preview", {
+  const response = await apiClient("/api/connectors/sync-all-preview", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   });

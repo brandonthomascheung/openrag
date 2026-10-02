@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { ArrowLeft, CheckCircle, Loader2, XCircle } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -81,7 +82,7 @@ function AuthCallbackContent() {
       code: string;
       state: string;
     }) => {
-      const response = await fetch("/api/auth/callback", {
+      const response = await apiClient("/api/auth/callback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

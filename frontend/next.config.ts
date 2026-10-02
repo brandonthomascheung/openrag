@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
     proxyTimeout: 300000, // 5 minutes
   },
   async rewrites() {
-    return [{ source: "/mcp/:path*", destination: "/api/mcp/:path*" }];
+    return [{ source: "/mcp/:path*", destination: "openrag-fe/api/mcp/:path*" }];
   },
   // Disable built-in image optimization so Next does not require the `sharp`
   // native dependency (and its LGPL libvips binaries). The only <Image> usage
@@ -50,6 +50,9 @@ const nextConfig: NextConfig = {
   },
   // Allow cross-origin requests in development
   allowedDevOrigins: getAllowedDevOrigins(),
+
+  //Attempt to add a base path for CPD - may need to figure out a way to toggle this based upon whether or not this is being built for CPD/SaaS
+  basePath: "/openrag-fe",
 };
 
 export default nextConfig;

@@ -38,7 +38,7 @@ export const useGetModelProvidersQuery = (
       // two-field shape fetches the enriched response immediately.
       queryKey: ["models", "providers", "v2"] as const,
       queryFn: async (): Promise<ModelProvidersResponse> => {
-        const response = await fetch("/api/models/providers");
+        const response = await apiClient("/api/models/providers");
         if (!response.ok) {
           throw new Error("Failed to fetch the model providers");
         }

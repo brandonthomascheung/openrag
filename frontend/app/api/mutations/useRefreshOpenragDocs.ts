@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 interface RefreshOpenRAGDocsResponse {
   message: string;
@@ -8,7 +9,7 @@ interface RefreshOpenRAGDocsResponse {
 }
 
 const refreshOpenragDocs = async (): Promise<RefreshOpenRAGDocsResponse> => {
-  const response = await fetch("/api/openrag-docs/refresh", {
+  const response = await apiClient("/api/openrag-docs/refresh", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

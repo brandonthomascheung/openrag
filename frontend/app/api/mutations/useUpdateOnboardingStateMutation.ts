@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import type { FunctionCall } from "@/app/chat/_types/types";
 
 interface UpdateOnboardingStateVariables {
@@ -21,7 +22,7 @@ export const useUpdateOnboardingStateMutation = () => {
 
   return useMutation({
     mutationFn: async (variables: UpdateOnboardingStateVariables) => {
-      const response = await fetch("/api/onboarding/state", {
+      const response = await apiClient("/api/onboarding/state", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

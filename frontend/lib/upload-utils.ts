@@ -14,7 +14,7 @@ export async function uploadFileForContext(
     formData.append("previous_response_id", previousResponseId);
   }
 
-  const response = await fetch("/api/upload_context", {
+  const response = await apiClient("/api/upload_context", {
     method: "POST",
     body: formData,
   });
@@ -95,7 +95,7 @@ export async function uploadFiles(
     formData.append("preview", "true");
   }
 
-  const uploadResponse = await fetch("/api/router/upload_ingest", {
+  const uploadResponse = await apiClient("/api/router/upload_ingest", {
     method: "POST",
     body: formData,
   });
@@ -151,7 +151,7 @@ export async function uploadFile(
       formData.append("preview", "true");
     }
 
-    const uploadResponse = await fetch("/api/router/upload_ingest", {
+    const uploadResponse = await apiClient("/api/router/upload_ingest", {
       method: "POST",
       body: formData,
     });

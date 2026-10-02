@@ -19,7 +19,7 @@ export interface CreateApiKeyResponse {
 async function createApiKey(
   variables: CreateApiKeyRequest,
 ): Promise<CreateApiKeyResponse> {
-  const response = await fetch("/api/keys", {
+  const response = await apiClient("/api/keys", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

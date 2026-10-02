@@ -32,7 +32,7 @@ export const useGetSearchAggregations = (
   const queryClient = useQueryClient();
 
   async function fetchAggregations(): Promise<SearchAggregations> {
-    const response = await fetch("/api/search", {
+    const response = await apiClient("/api/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, limit, scoreThreshold }),
