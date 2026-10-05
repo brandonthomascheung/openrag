@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 interface DeleteDocumentRequest {
   filename: string;
@@ -16,7 +17,7 @@ interface DeleteDocumentResponse {
 async function deleteDocumentByFilename(
   filename: string,
 ): Promise<DeleteDocumentResponse> {
-  const response = await fetch("/api/documents/delete-by-filename", {
+  const response = await apiClient("/api/documents/delete-by-filename", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

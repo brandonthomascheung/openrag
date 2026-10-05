@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronsUpDown, LogOut, Moon, Sun, User } from "lucide-react";
+import { apiClient } from "@/lib/api-client";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -33,7 +34,7 @@ export function UserNav() {
   const performLogout = async () => {
     if (isCloudBrand) {
       try {
-        await fetch("/api/auth/logout", { method: "POST" });
+        await apiClient("/api/auth/logout", { method: "POST" });
       } catch {
         // Best-effort server cleanup; redirect regardless.
       }

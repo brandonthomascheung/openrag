@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 interface DismissFlowsUpdateVariables {
   flow_types?: string[];
@@ -9,7 +10,7 @@ export function useDismissFlowsUpdateMutation() {
 
   return useMutation({
     mutationFn: async (variables?: DismissFlowsUpdateVariables) => {
-      const response = await fetch("/api/settings/flows/dismiss-update", {
+      const response = await apiClient("/api/settings/flows/dismiss-update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(variables || {}),

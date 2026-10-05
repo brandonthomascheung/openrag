@@ -19,7 +19,7 @@ async function rollbackOnboarding(
 ): Promise<OnboardingRollbackResponse> {
   const requestBody = params || { embedding_only: false };
 
-  const response = await fetch("/api/onboarding/rollback", {
+  const response = await apiClient("/api/onboarding/rollback", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

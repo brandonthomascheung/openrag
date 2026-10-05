@@ -4,6 +4,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import type { CatalogModel } from "@/components/models/catalog-models";
+import { apiClient } from "@/lib/api-client";
 import { formatProviderErrorMessage } from "@/lib/chat-stream-errors";
 import { useGetSettingsQuery } from "./useGetSettingsQuery";
 
@@ -72,7 +73,7 @@ export const useGetOpenAIModelsQuery = (
           body.api_key = apiKey;
         }
 
-        const response = await fetch("/api/models/openai", {
+        const response = await apiClient("/api/models/openai", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -108,7 +109,7 @@ export const useGetAnthropicModelsQuery = (
           body.api_key = apiKey;
         }
 
-        const response = await fetch("/api/models/anthropic", {
+        const response = await apiClient("/api/models/anthropic", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -197,7 +198,7 @@ export const useGetIBMModelsQuery = (
           body.api_key = apiKey;
         }
 
-        const response = await fetch("/api/models/ibm", {
+        const response = await apiClient("/api/models/ibm", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -320,7 +321,7 @@ export const useGetModelCatalogQuery = (
     {
       queryKey: ["models", "catalog"] as const,
       queryFn: async (): Promise<ModelCatalogResponse> => {
-        const response = await fetch("/api/models/catalog");
+        const response = await apiClient("/api/models/catalog");
         if (response.ok) {
           return (await response.json()) as ModelCatalogResponse;
         }

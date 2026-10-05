@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 interface UpdateFlowsVariables {
   flow_types: string[];
@@ -18,7 +19,7 @@ export function useUpdateFlowsMutation() {
 
   return useMutation({
     mutationFn: async (variables: UpdateFlowsVariables) => {
-      const response = await fetch("/api/settings/flows/update", {
+      const response = await apiClient("/api/settings/flows/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(variables),

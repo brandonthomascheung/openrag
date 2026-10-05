@@ -4,6 +4,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { apiClient } from "@/lib/api-client";
 import { formatProviderErrorMessage } from "@/lib/chat-stream-errors";
 import { useUpdateOnboardingStateMutation } from "./useUpdateOnboardingStateMutation";
 
@@ -39,7 +40,7 @@ interface OnboardingResponse {
 async function submitOnboarding(
   variables: OnboardingVariables,
 ): Promise<OnboardingResponse> {
-  const response = await fetch("/api/onboarding", {
+  const response = await apiClient("/api/onboarding", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

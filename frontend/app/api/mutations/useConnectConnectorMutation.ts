@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/auth-context";
 import { encodeBase64 } from "@/lib/utils";
@@ -39,7 +40,7 @@ export const useConnectConnectorMutation = () => {
        * not persist a data-source connection on success. */
       purpose?: "data_source" | "test";
     }): Promise<ConnectResponse> => {
-      const response = await fetch("/api/auth/init", {
+      const response = await apiClient("/api/auth/init", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

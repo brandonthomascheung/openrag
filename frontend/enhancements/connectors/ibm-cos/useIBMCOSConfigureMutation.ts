@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 export interface IBMCOSConfigurePayload {
   auth_mode: "iam" | "hmac";
@@ -17,7 +18,7 @@ export interface IBMCOSConfigurePayload {
 }
 
 async function configureIBMCOS(payload: IBMCOSConfigurePayload) {
-  const res = await fetch("/api/connectors/ibm_cos/configure", {
+  const res = await apiClient("/api/connectors/ibm_cos/configure", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

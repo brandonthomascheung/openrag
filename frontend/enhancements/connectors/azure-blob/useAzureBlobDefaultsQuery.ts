@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 export interface AzureBlobDefaults {
   connection_string_set: boolean;
@@ -11,7 +12,7 @@ export interface AzureBlobDefaults {
 }
 
 async function fetchAzureBlobDefaults(): Promise<AzureBlobDefaults> {
-  const res = await fetch("/api/connectors/azure_blob/defaults");
+  const res = await apiClient("/api/connectors/azure_blob/defaults");
   if (!res.ok) throw new Error("Failed to fetch Azure Blob defaults");
   return res.json();
 }

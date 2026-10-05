@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Loader2 } from "lucide-react";
+import { apiClient } from "@/lib/api-client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -226,7 +227,7 @@ export function AgentSettingsSection() {
       namespace: "settings",
     });
 
-    fetch("/api/reset-flow/retrieval", { method: "POST" })
+    apiClient("/api/reset-flow/retrieval", { method: "POST" })
       .then((res) =>
         res.text().then((text) => {
           const body = text ? JSON.parse(text) : {};

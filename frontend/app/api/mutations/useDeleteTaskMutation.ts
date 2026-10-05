@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 import { TASKS_QUERY_KEY, type Task } from "@/app/api/queries/useGetTasksQuery";
 
 export function useDeleteTaskMutation() {
@@ -29,7 +30,7 @@ export function useDeleteAllTerminalTasksMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (): Promise<string[]> => {
-      const res = await fetch("/api/tasks", { method: "DELETE" });
+      const res = await apiClient("/api/tasks", { method: "DELETE" });
       if (res.status === 404) return [];
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));

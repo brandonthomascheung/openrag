@@ -9,6 +9,7 @@ import React, {
   useState,
 } from "react";
 import { hasRbacPermission } from "@/lib/brand";
+import { apiClient } from "@/lib/api-client";
 import type { RunMode } from "@/lib/constants";
 import { encodeBase64 } from "@/lib/utils";
 
@@ -84,7 +85,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const checkAuth = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/auth/me");
+      const response = await apiClient("/api/auth/me");
 
       // If we can't reach the backend, keep loading
       if (!response.ok && (response.status === 0 || response.status >= 500)) {
@@ -135,7 +136,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Use the correct auth callback URL, not connectors callback
     const redirectUri = `${window.location.origin}/auth/callback`;
 
-    fetch("/api/auth/init", {
+    apiClient("/api/auth/init", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -182,7 +183,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const loginWithIbm = async (username: string, password: string) => {
-    const response = await fetch("/api/auth/ibm/login", {
+    const response = await apiClient("/api/auth/ibm/login", {
       method: "POST",
       headers: {
         Authorization: "Basic " + btoa(username + ":" + password),
@@ -201,7 +202,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     try {
-      await fetch("/api/auth/logout", {
+      await apiClient("/api/auth/logout", {
         method: "POST",
       });
       setUser(null);
@@ -233,7 +234,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const fetchPermissions = useCallback(async () => {
     try {
-      const r = await fetch("/api/users/me");
+      const r = await apiClient("/api/users/me");
       if (!r.ok) {
         resetPermissionState();
         return;
@@ -272,7 +273,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const fetchOnboardingStatus = useCallback(async () => {
     try {
-      const r = await fetch("/api/onboarding-status");
+      const r = await apiClient("/api/onboarding-status");
       if (!r.ok) return;
       const data = await r.json();
       setIsOnboarded(Boolean(data?.onboarded));
