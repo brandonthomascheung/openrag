@@ -25,11 +25,14 @@ function getAllowedDevOrigins(): string[] {
     .filter(Boolean);
 }
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const nextConfig: NextConfig = {
   // Build/dev output directory. Overridable via NEXT_DIST_DIR so multiple
   // `next dev` servers can run simultaneously from this same directory: Next.js
   // 16 acquires a lock at `<distDir>/lock` keyed on the project dir + distDir
   // (not the port), so a second instance must use a distinct distDir.
+  basePath  : basePath, 
   distDir: process.env.NEXT_DIST_DIR || ".next",
   // Increase timeout for API routes
   experimental: {
